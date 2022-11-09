@@ -1,0 +1,142 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+ void create();
+ void delete();
+ void traversal();
+ struct node
+  {
+       int data;
+       struct node *link;
+  }
+    *header, *new, *ptr, *ptr1;
+    void main()
+     { 
+          int ch;
+          header->data=0;
+          header->link = NULL;
+          while(1)
+           {
+                printf("\n\nEnter the choice of operation");
+                printf("\n1. create\t2. delete3. traversal\n");
+                scanf("%d", &ch);
+                switch(ch)
+                {
+                     case 1: create();
+                             break;
+                    case 2: delete();
+                            break;
+                    case 3: traversal();
+                            break;
+                    default : exit(0);
+                }
+           }
+             
+              void create()
+               {
+                     int x;
+                     new=malloc(sizeof(struct node));
+                     printf("\nEnter the data value");
+                     scanf("%d",&x);
+                     if(header->link == NULL)
+                     {
+                          header->link = new;
+                          new->link = NULL;
+                          new->data = x;
+                     }
+                     else
+                     {
+                         ptr = header;
+                         while(ptr->link!=NULL)
+                         {
+                              ptr = ptr->link;
+                         }
+                         ptr->link = new;
+                         new->link = NULL;
+                         new->data = x;
+                     }
+               }
+                void delete()
+                 {
+                       int pos,x,key;
+                       printf("\nEnter the position for deletion");
+                       printf("\n1. Beginning2. Ending\t3. At any position\n");
+                       scanf("%d", &pos);
+                       if(pos==1);
+                       {
+                            ptr = header;
+                            if(ptr->link =NULL)
+                             {
+                                  printf("\nSLL is empty");
+                             }
+                             else
+                             {
+                                 ptr1 = ptr;
+                                 ptr = ptr->link;
+                                 ptr1->link = ptr->link;
+                                 printf("\nNode delected is %d",ptr->data);
+                                 free(ptr);
+                             }
+                       }
+                        if(pos == 2)
+                       {
+                           ptr = header;
+                           if(ptr->link == NULL)
+                           {
+                               printf("/nSLL is empty, unable to perform deletion");
+                           }
+                           else
+                           {
+                               ptr1 = ptr;
+                               ptr = ptr->link;
+                               while(ptr->link!=NULL)
+                               {
+                                   ptr1 = ptr;
+                                   ptr = ptr->link;
+                               }
+                               ptr1->link = NULL;
+                               printf("\nDeleted node is %d", ptr->data);
+                               free(ptr);
+                           }
+                       }
+                       else if(pos == 3)
+                       {
+                           ptr = header;
+                           if(ptr->link = NULL)
+                           {
+                               printf("\nSLL is empty, unable to perform deletion");
+                           }
+                           else
+                           {
+                               printf("\nEnter the data value to delete");
+                               scanf("%d", &key);
+                               while(ptr->data!=key && ptr->link!=NULL)
+                               {
+                                   ptr1 = ptr;
+                                   ptr = ptr->link;
+                               }
+                               if(ptr->link == NULL)
+                               {
+                                   printf("\nNode with key was not found");
+                               }
+                               else
+                               {
+                                   ptr1->link = ptr->link;
+                                   printf("\nDeleted node is %d", ptr->data);
+                                   free(ptr);
+                                  }
+                                  }
+                           }
+                }
+                 
+                  void traverse()
+                  {
+                      printf("\nElements in the list are:/n");
+                      ptr = header;
+                      while(ptr->link!=NULL)
+                      {
+                          ptr = ptr->link;
+                          printf("\t%d", ptr->data);
+                      }
+                }
+     }
